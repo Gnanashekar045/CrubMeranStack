@@ -14,16 +14,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/crud_db')
 // Schema and Model
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
-});
+},{timestamps: true});
 
-const User = mongoose.model("User", userSchema, "APIusers");
+const Customer = mongoose.model("Customer", userSchema, "APIusers");
+
 
 
 // Routes
 app.post("/createUser", async (req, res) => {
   try {
     const bodyData = req.body;
-    const user = new User(bodyData);
+    const user = new Customer(bodyData);
     const userData = await user.save();
     res.send(userData);
   } catch (error) {
