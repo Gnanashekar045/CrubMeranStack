@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors"); // 👈 add this
 const app = express();
 const PORT = 5000;
 
+app.use(cors());
 // Middleware
 app.use(express.json()); // <--- Needed to parse JSON bodies
 

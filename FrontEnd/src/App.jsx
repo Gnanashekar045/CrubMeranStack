@@ -1,9 +1,19 @@
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./Home";
+import ReadUser from "./ReadUser";
+import UpdateUser from "./UpdateUser";
 
-
-export default function App() {
+function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/readuser/:id" element={<ReadUser />} />
+        <Route path="/updateuser/:id" element={<UpdateUser />} />
+      </Routes>
+    </div>
+  );
 }
+
+export default App;
