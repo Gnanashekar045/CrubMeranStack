@@ -10,7 +10,7 @@ const UpdateUser = () => {
   });
 
   const { id } = useParams();
-  // data fetching single
+
   const fetchSingleUser = async () => {
     const res = await axios.get(`http://localhost:5000/read/${id}`);
     console.log(res);
@@ -20,16 +20,18 @@ const UpdateUser = () => {
       password: res.data.password,
     });
   };
+
   useEffect(() => {
     fetchSingleUser();
   }, []);
 
-  const handleChnage = (event) => {
+  const handleChange = (event) => {
     setInputUser({
       ...inputUser,
       [event.target.name]: event.target.value,
     });
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(inputUser);
@@ -41,54 +43,39 @@ const UpdateUser = () => {
     if (res.status === 200) {
       window.location = "/";
     }
-    // fetchAllUser();
   };
+
   return (
-    <div className="w-2/3 mx-auto mt-5">
+    <div>
       <form onSubmit={handleSubmit}>
         <h1>Update User</h1>
-        <div className="">
-          <label className=" text-sm text-gray-500 ">Name</label>
-          <input
-            type="text"
-            name="name"
-            className="block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent  border-2 border-gray-300"
-            placeholder="Enter name"
-            required
-            value={inputUser.name}
-            onChange={handleChnage}
-          />
+        <div>
+          <label>Name</label>
+          <input type="text" name="name" placeholder="Enter name" required value={inputUser.name} onChange={handleChange}/>
         </div>
-        <div className="">
-          <label className=" text-sm text-gray-500 ">Email</label>
+        <div>
+          <label>Email</label>
           <input
             type="text"
             name="email"
-            className="block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent  border-2 border-gray-300"
-            placeholder="Enter email "
+            placeholder="Enter email"
             required
             value={inputUser.email}
-            onChange={handleChnage}
+            onChange={handleChange}
           />
         </div>
-        <div className="">
-          <label className=" text-sm text-gray-500 ">Password</label>
+        <div>
+          <label>Password</label>
           <input
             type="password"
             name="password"
-            className="block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent  border-2 border-gray-300"
-            placeholder="Enter Password "
+            placeholder="Enter password"
             required
             value={inputUser.password}
-            onChange={handleChnage}
+            onChange={handleChange}
           />
         </div>
-
-        <div className="flex justify-center my-4">
-          <button type="submit" className="px-4 py-2 bg-yellow-400 rounded-sm">
-            Update User
-          </button>
-        </div>
+        <button type="submit">Update User</button>
       </form>
     </div>
   );
