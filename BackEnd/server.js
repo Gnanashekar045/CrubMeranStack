@@ -14,6 +14,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/crud_db')
 // Schema and Model
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
 },{timestamps: true});
 
 const Customer = mongoose.model("Customer", userSchema, "APIusers");
@@ -32,9 +34,46 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("from get route");
+app.get("/readAllUser", async (req, res) => {
+  try {
+    const userdatax = await Customer.find({})
+    res.send(userdatax)
+  } catch (error) {
+    res.send(error)
+  }
+})
+
+app.get("/readUser/:id", async(req, res) => {
+  try {
+    const id = req.params.id
+    const user = await Customer.findById({_id: id});
+    res.send(user)
+  } catch (error) {
+    res.send(error)
+  }
 });
+
+app.put("/updateUser/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await Customer.findByIdAndUpdate({ _id: id }, req.body, { new: true });
+    res.send(user);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await Customer.findByIdAndDelete({ _id: id });
+    res.send(user);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+
 
 // Start server
 app.listen(PORT, () => {
