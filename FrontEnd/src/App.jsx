@@ -20,9 +20,16 @@ const App = () => {
     fetchUsers();
   }, []);
 
+  // const handleChange = (e) => {
+  //   setInputUser({ ...inputUser, [e.target.name]: e.target.value });
+  // };
+
   const handleChange = (e) => {
-    setInputUser({ ...inputUser, [e.target.name]: e.target.value });
-  };
+    const {value, name} = e.target
+    setInputUser((pre)=>({
+      ...pre, [name]: value
+    }))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

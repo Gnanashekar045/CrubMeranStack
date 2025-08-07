@@ -22,8 +22,6 @@ const userSchema = new mongoose.Schema({
 
 const Customer = mongoose.model("Customer", userSchema, "APIusers");
 
-
-
 // Routes
 app.post("/createUser", async (req, res) => {
   try {
@@ -74,8 +72,6 @@ app.delete("/delete/:id", async (req, res) => {
     res.send(error);
   }
 });
-
-
 
 // Start server
 app.listen(PORT, () => {
